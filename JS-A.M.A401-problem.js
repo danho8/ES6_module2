@@ -9088,7 +9088,13 @@ function problem0601() {
 
 function problem0602() {
   // return an array of user which is male and age under 40 using Array.prototype.reduce
+//  const result = users.reduce((acc, cur) => {
+
+
+//  }, []);
+
 }
+problem0602();
 
 function problem0603() {
   // return new array where each record is in camelCase using Array.prototype.reduce
@@ -9139,7 +9145,6 @@ console.log(faMap([1, 2, 3], (item, index) => (item += 2)));
 // console.log(faMap([1, 2, 3], (item, index) => item += 2));
 
 function faFilter(array, callbackFn) {
-  
   // implement faMap that works like Array.prototype.filter
   const result = [];
   array.forEach((item, index) => {
@@ -9151,32 +9156,85 @@ function faFilter(array, callbackFn) {
   return result;
 }
 
-function faReduce(array, fn, defaultValue) {}
+function faReduce(array, fn, defaultValue) {
+
+  let accumulator = defaultValue === undefined ? 0 : defaultValue;
+  for (let i = 0; i < array.length; i++) {
+    accumulator = fn(accumulator, array[i], i, array);
+  }
+
+  return accumulator;
+
+}
 
 // console.log(faReduce([1, 2, 3], (p, c, i) => p += c));
 
 function problem1101(array, fn) {
   // map array using faReduce
+
+  const result = [];
+  array.forEach((item, index) => {
+    result.push(fn(item, index));
+  });
+
+  return result;
 }
 
 function problem1102(array, fn) {
   // filter array using faReduce
+  const result = [];
+  array.forEach((item, index) => {
+    if (fn(item, index)) {
+      result.push(item);
+    }
+  });
+
+  return result;
 }
 
 function problem1201(array) {
   // implement sum array with faReduce
+  let sum = 0;
+  for (let i = 0; i < array.length; i++) {
+    sum += array[i];
+  }
+
+  return sum;
 }
 
 function problem1202(array) {
   // implement product array with faReduce
+  let product = 1;
+  for (let i = 0; i < array.length; i++) {
+    product *= array[i];
+  }
+
+  return product;
+
 }
 
 function problem1203(array) {
   // implement reverse array with faReduce
+  const result = [];
+  for (let i = array.length - 1; i >= 0; i--) {
+    result.push(array[i]);
+
+  }
+
+  return result;
 }
 
 function getProp(obj, path) {
   // use Array.prototype.reduce
+  const result = path.split(".").reduce((acc, cur) => {
+    if (acc[cur]) {
+      return acc[cur];
+    } else {
+      return undefined;
+    }
+  }, obj);
+
+  return result;
 }
 
 // var student = {
